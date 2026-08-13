@@ -659,11 +659,12 @@ body.cursor-active .cursor-dot { opacity: 1; }
   object-position: center;
 }
 .project--services .project__media--video {
-  aspect-ratio: auto; /* Sobrescreve o formato 4:3 e usa a proporção nativa do vídeo. */
-  height: auto;
+  aspect-ratio: 9 / 16; /* Reserva o espaço do vídeo vertical antes de ele carregar. */
   width: min(100%, 420px);
   justify-self: center;
   position: relative;
+  overflow: hidden;
+  line-height: 0;
   background: #fff;
   box-sizing: border-box;
   border: 1px solid rgba(17, 17, 17, 0.14);
@@ -671,10 +672,11 @@ body.cursor-active .cursor-dot { opacity: 1; }
 }
 .project__video {
   width: 100%;
-  height: auto;
+  height: 100%;
   display: block;
-  object-fit: contain;
-} /* Mantém o vídeo inteiro e respeita a proporção original. */
+  object-fit: cover;
+  object-position: center;
+} /* Mantém o vídeo vertical estável em qualquer tamanho de tela. */
 .project__audio-toggle {
   position: absolute;
   right: 0.8rem;
@@ -689,6 +691,7 @@ body.cursor-active .cursor-dot { opacity: 1; }
   color: #fff;
   backdrop-filter: blur(6px);
   transition: background 0.25s var(--ease-soft), transform 0.25s var(--ease-soft);
+  touch-action: manipulation;
 } /* Ícone discreto: o único controle visível do vídeo de serviços. */
 .project__audio-toggle:hover,
 .project__audio-toggle:focus-visible {
@@ -1051,4 +1054,14 @@ body.cursor-active .cursor-dot { opacity: 1; }
   .lightbox__meta { bottom: 5.3rem; display: block; text-align: center; }
   .lightbox__count { margin-top: 0.25rem; }
   .project { padding-top: 2.4rem; padding-bottom: 2.4rem; }
+  .project--services .project__media--video {
+    width: min(100%, 20rem, 39.375svh);
+    margin-inline: auto;
+  }
+  .project__audio-toggle {
+    right: 0.65rem;
+    bottom: 0.65rem;
+    width: 2.75rem;
+    height: 2.75rem;
+  }
 }
